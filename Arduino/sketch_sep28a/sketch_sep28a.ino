@@ -10,6 +10,7 @@ int RE = 250; // Potencia dos motores para ré
 int LeituraD = 80; // Valor de leitura analogica (sensor Direito)
 int LeituraE = 80; // Valor de leitura analogica (sensor Esquerdo)
 int LED = 2;
+int DelayVirar= 45;
 
   //Configurando o setup (entradas e saidas)
 void setup(){
@@ -38,7 +39,7 @@ void loop(){ // Configurando o modo de repetição e condicionais
 
   // Entra nessa condição caso os valores de leitura dos sensores forem maior que os estipulados em Leitura(D/E).
 
-
+/* Comentado para testes
   if(analogRead(SensorE) >= LeituraE && analogRead(SensorD) >= LeituraD){
     // Ao entrar aqui o codigo faz o robô parar.
     analogWrite(MDF, 0);
@@ -48,10 +49,13 @@ void loop(){ // Configurando o modo de repetição e condicionais
     
     // Nesse comando os valores de potencia dos motores sao definidos como zero (desligados)
   }
+
+  */
   
 
   // Entra nessa condição caso os valores de leitura dos sensores forem diferentes (Os valores variam conforme o robô anda)
-  else if(analogRead(SensorE) >= LeituraE && analogRead(SensorD) <=LeituraD) {
+  //else if
+  if(analogRead(SensorE) >= LeituraE && analogRead(SensorD) <=LeituraD) {
     // Sensor Esquerdo maior ou igual ao valor de Leitura Esquerda e Sensor Direito menor ou igual ao valor de Leitura Direito
     
     // Ao entrar aqui o codigo faz o robô virar a esquerda.
@@ -59,6 +63,7 @@ void loop(){ // Configurando o modo de repetição e condicionais
     analogWrite(MEF, 0);
     analogWrite(MDT, 0);
     analogWrite(MET, RE); // Motor Esquerdo Trás anda na potencia estipulada por RE
+    delay(DelayVirar);
   }
 
   // Entra nessa condição caso os valores de leitura dos sensores forem diferentes (Os valores variam conforme o robô anda)
@@ -70,6 +75,7 @@ void loop(){ // Configurando o modo de repetição e condicionais
     analogWrite(MEF, POT); // Motor Esquerdo Frente anda na potencia estipulada por POT.
     analogWrite(MDT, RE); // Motor Direito Trás anda na potencia estipulada por RE.
     analogWrite(MET, 0);
+    delay(DelayVirar);
   }
 
   // Entra nessa condição caso nenhuma das condiçoes anteriores forem atendidas
@@ -80,6 +86,7 @@ void loop(){ // Configurando o modo de repetição e condicionais
     analogWrite(MEF, POT); // Motor Esquerdo Frente anda na potencia estipulada por POT.
     analogWrite(MDT, 0);
     analogWrite(MET, 0);
+    delay(DelayVirar);
   }
 
 
